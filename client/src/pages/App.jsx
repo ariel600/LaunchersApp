@@ -13,12 +13,13 @@ function App() {
   return (
     <div className='home-page'>
       <h1 className='title' >List of launchers</h1>
+      <input type="text" className='input-filter' />
       {
         launchers.map(launcher => {
           return (
             <div className='cards' key={launcher._id}>
               <h2 className='name-card'>Name: {launcher.name}</h2>
-              <p className='t ype-card'>Type: {launcher.rocketType}</p>
+              <p className='type-card'>Type: {launcher.rocketType}</p>
               <p className='city-card'>City: {launcher.city}</p>
               <p className='location-card'>Location: {launcher.longitude} X {launcher.latitude}</p>
             </div>
