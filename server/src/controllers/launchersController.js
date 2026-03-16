@@ -1,8 +1,8 @@
-import { createLauncherS, getLaunchersS } from "../services/launchersS"
+import { createLauncherService, getLaunchersService } from "../services/launchersService.js"
 
-export function getLaunchersC(req, res) {
+export function getLaunchersController(req, res) {
     try {
-        const launchers = getLaunchersS()
+        const launchers = getLaunchersService()
         return res.status(200).json(launchers)
     } catch (error) {
         console.error(error.message)
@@ -10,11 +10,11 @@ export function getLaunchersC(req, res) {
     }
 }
 
-export function createLauncherC(req, res) {
+export function createLauncherController(req, res) {
     try {
         const { name, rocketType, latitude, longitude, city } = req.body
-        const result = createLauncherS({ name, rocketType, latitude, longitude, city })
-        return res.status(200).send(result)
+        const result = createLauncherService({ name, rocketType, latitude, longitude, city })
+        return res.status(200).send(result.insertedId)
     } catch (error) {
         console.error(error.message)
         return res.status(500).json({ error: error.message })

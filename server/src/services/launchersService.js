@@ -1,9 +1,9 @@
 import { db } from "../db/connection.js";
 
-const collection = db.collection('launchers');
 
-export function getLaunchersS() {
+export function getLaunchersService() {
     try {
+        const collection = db.collection('launchers');
         const launchers = collection.find({})
         return launchers
     } catch (error) {
@@ -12,12 +12,13 @@ export function getLaunchersS() {
     }
 }
 
-export async function createLauncherS(launcher) {
+export async function createLauncherService(launcher) {
     try {
+        const collection = db.collection('launchers');
         const result = await collection.insertOne(launcher);
         console.log(result);
     } catch (error) {
-        console.error(error.message)
-        throw new Error(error.message);
+        console.error(error)
+        throw new Error(error);
     }
 }

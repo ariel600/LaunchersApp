@@ -11,7 +11,21 @@ export async function connect() {
         console.log("Connected to mongoDB")
     } catch (error) {
         console.error(error.message)
-    } finally {
-        await client.close()
     }
+}
+
+const collection = await db.listCollections({ name: "launchers" }).toArray()
+
+if (collection.length === 0) {
+    await db.createCollection('launchers', {
+        validator: {
+            $jsonSchema: {
+                name: "string",
+                rocketType: "Shahab3" | "Fetah110" | "Radwan" | "Kheibar",
+                latitude: "number",
+                longitude: "number",
+                city: "string"
+            }
+        }
+    })
 }
