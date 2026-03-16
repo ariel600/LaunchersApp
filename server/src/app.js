@@ -1,7 +1,10 @@
 import express from "express"
 import cors from "cors"
 import { config } from "dotenv"
+import { connect } from "./db/connection.js"
+
 config()
+connect()
 
 const app = express()
 const port = process.env.PORT
