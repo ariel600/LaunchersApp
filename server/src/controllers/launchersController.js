@@ -1,4 +1,4 @@
-import { createLauncherService, getLaunchersService } from "../services/launchersService.js"
+import { createLauncherService, getLauncherService, getLaunchersService } from "../services/launchersService.js"
 
 export function getLaunchersController(req, res) {
     try {
@@ -15,6 +15,17 @@ export function createLauncherController(req, res) {
         const { name, rocketType, latitude, longitude, city } = req.body
         const result = createLauncherService({ name, rocketType, latitude, longitude, city })
         return res.status(200).send(result.insertedId)
+    } catch (error) {
+        console.error(error.message)
+        return res.status(500).json({ error: error.message })
+    }
+}
+
+export async function getLauncherController(req, res) {
+    try {
+        const { id } = req.params
+        const launcher = await getLauncherService(id)
+        return res.status(200).json(launcher)
     } catch (error) {
         console.error(error.message)
         return res.status(500).json({ error: error.message })

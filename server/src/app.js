@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 import { config } from "dotenv"
 import { connect } from "./db/connection.js"
-import { createLauncherController, getLaunchersController } from "./controllers/launchersController.js"
+import { createLauncherController, getLauncherController, getLaunchersController } from "./controllers/launchersController.js"
 
 config()
 await connect()
@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get("/api/launchers", getLaunchersController)
-app.get("/api/launchers/:id")
+app.get("/api/launchers/:id", getLauncherController)
 app.post("/api/launchers", createLauncherController)
 
 app.listen(port, ()=>{
