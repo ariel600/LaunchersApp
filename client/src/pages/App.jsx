@@ -14,13 +14,15 @@ function App() {
     <div className='home-page'>
       <h1 className='title' >List of launchers</h1>
       {
-        launchers.map(launcher=>{
-          <div className='cards' key={launcher._id}>
-            <h2 className='name-card'>Name: {launcher.name}</h2>
-            <p className='type-card'>Type: {launcher.rocketType}</p>
-            <p className='city-card'>City: {launcher.city}</p>
-            <p className='location-card'>Location: {launcher.longitude} X {launcher.latitude}</p>
-          </div>
+        launchers.map(launcher => {
+          return (
+            <div className='cards' key={launcher._id}>
+              <h2 className='name-card'>Name: {launcher.name}</h2>
+              <p className='t ype-card'>Type: {launcher.rocketType}</p>
+              <p className='city-card'>City: {launcher.city}</p>
+              <p className='location-card'>Location: {launcher.longitude} X {launcher.latitude}</p>
+            </div>
+          )
         })
       }
     </div>
