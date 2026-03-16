@@ -1,32 +1,13 @@
-import { useEffect, useState } from 'react'
-import { getAllLaunchers } from '../api/launchers'
+import { Route, Routes } from "react-router"
 import '../styles/App.css'
+import HomePage from "./HomePage"
 
 function App() {
-  const [launchers, setLaunchers] = useState([])
-
-  useEffect(() => {
-    getAllLaunchers()
-      .then(data => setLaunchers(data))
-      .catch(error => console.error(error))
-  }, [])
   return (
-    <div className='home-page'>
-      <h1 className='title' >List of launchers</h1>
-      <input type="text" className='input-filter' />
-      {
-        launchers.map(launcher => {
-          return (
-            <div className='cards' key={launcher._id}>
-              <h2 className='name-card'>Name: {launcher.name}</h2>
-              <p className='type-card'>Type: {launcher.rocketType}</p>
-              <p className='city-card'>City: {launcher.city}</p>
-              <p className='location-card'>Location: {launcher.longitude} X {launcher.latitude}</p>
-            </div>
-          )
-        })
-      }
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/addLauncher" element={<HomePage />} />
+    </Routes>
   )
 }
 
