@@ -2,10 +2,10 @@ import { ObjectId } from "mongodb";
 import { db } from "../db/connection.js";
 
 
-export function getLaunchersService() {
+export async function getLaunchersService() {
     try {
         const collection = db.collection('launchers');
-        const launchers = collection.find({})
+        const launchers = await collection.find({}).toArray()
         return launchers
     } catch (error) {
         console.error(error.message)
