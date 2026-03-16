@@ -3,7 +3,7 @@ import { config } from "dotenv"
 config()
 
 const client = new MongoClient(process.env.URL)
-export const db = client.db('launchers');
+export const db = client.db('LaunchersApp');
 
 export async function connect() {
     try {

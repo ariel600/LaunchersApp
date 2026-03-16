@@ -1,6 +1,6 @@
 import { db } from "../db/connection.js";
 
-const collection = db.collection('users');
+const collection = db.collection('launchers');
 
 export function getLaunchersS() {
     try {
@@ -8,6 +8,7 @@ export function getLaunchersS() {
         return launchers
     } catch (error) {
         console.error(error.message)
+        throw new Error(error.message);
     }
 }
 
@@ -17,5 +18,6 @@ export async function createLauncherS(launcher) {
         console.log(result);
     } catch (error) {
         console.error(error.message)
+        throw new Error(error.message);
     }
 }
