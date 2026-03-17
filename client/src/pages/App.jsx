@@ -4,10 +4,16 @@ import HomePage from "./HomePage"
 import AddLauncherPage from "./AddLauncherPage"
 import LoginPage from "./LoginPage"
 import ProtectedRoute from "../components/ConnectionTest"
+import RegisterPage from "./RegisterPage"
 
 function App() {
   return (
     <Routes>
+      <Route path="/register" element={
+        <ProtectedRoute>
+          <RegisterPage />
+        </ProtectedRoute>
+      } />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={
         <ProtectedRoute>
