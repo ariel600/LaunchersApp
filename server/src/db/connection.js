@@ -14,17 +14,39 @@ export async function connect() {
     }
 }
 
-const collection = await db.listCollections({ name: "launchers" }).toArray()
+const collectionLaunchers = await db.listCollections({ name: "launchers" }).toArray()
 
-if (collection.length === 0) {
+if (collectionLaunchers.length === 0) {
     await db.createCollection('launchers', {
         validator: {
             $jsonSchema: {
-                name: "string",
-                rocketType: "Shahab3" | "Fetah110" | "Radwan" | "Kheibar",
-                latitude: "number",
-                longitude: "number",
-                city: "string"
+                bsonType: 'object',
+                properties: {
+                    name: { bsonType: "string" },
+                    rocketType: { bsonType: "string" },
+                    latitude: { bsonType: "number" },
+                    longitude: { bsonType: "number" },
+                    city: { bsonType: "string" }
+                }
+            }
+        }
+    })
+}
+
+const collectionUsers = await db.listCollections({ name: "users" }).toArray()
+
+if (collectionUsers.length === 0) {
+    await db.createCollection('users', {
+        validator: {
+            $jsonSchema: {
+                bsonType: 'object',
+                properties: {
+                    username: { bsonType: "string" },
+                    password: { bsonType: "string" },
+                    email: { bsonType: "string" },
+                    user_type: { bsonType: "string" },
+                    last_login: { bsonType: "string" }
+                }
             }
         }
     })
