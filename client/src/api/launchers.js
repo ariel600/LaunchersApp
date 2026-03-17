@@ -1,6 +1,10 @@
 export async function getAllLaunchers() {
     try {
-        const res = await fetch("http://localhost:3000/api/launchers")
+        const res = await fetch("http://localhost:3000/api/launchers", {
+            headers: {
+                token: localStorage.getItem("token")
+            }
+        })
         const launchers = await res.json()
         return launchers
     } catch (error) {
@@ -14,7 +18,8 @@ export async function addLauncher(launcher) {
         const res = await fetch("http://localhost:3000/api/launchers", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                token: localStorage.getItem("token")
             },
             body: JSON.stringify(launcher)
         })
