@@ -1,4 +1,5 @@
 import { createUserService, deleteUserService, loginService, updateUserService } from "../services/authService.js"
+import { signToken } from "../utils/token.js"
 
 export async function createUserController(req, res) {
     try {
@@ -36,10 +37,16 @@ export async function deleteUserController(req, res) {
 export async function loginController(req, res) {
     try {
         const { username, password } = req.body
-        const login = await loginService(username, password)
-        if (login) {
-            updateUserService(login._id, { login_last: new Date.toString() })
-            return res.status(200).json({ login: "Successful" })
+        const user = await loginService(username, password)
+        if (user) {
+            const payload = {
+                id: user._id,
+                username: user.username,
+                user_type: user.user_type
+            }
+            const token = signToken(payload)
+            await updateUserService(user._id, { login_last: new Date().toString() })
+            return res.status(200).json(token)
         }
         return res.status(401).json({ error: "Incorrect username or password" })
     } catch (error) {
