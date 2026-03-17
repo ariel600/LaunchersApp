@@ -15,7 +15,7 @@ export async function loginApi(username, password) {
     }
 }
 
-export async function addUserApi(user){
+export async function addUserApi(user) {
     try {
         const res = await fetch("http://localhost:3000/api/auth/register", {
             method: "POST",
@@ -27,6 +27,23 @@ export async function addUserApi(user){
         })
         const result = await res.json()
         return result
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
+
+export async function getUser() {
+    try {
+        const res = await fetch("http://localhost:3000/api/auth/getUser", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                token: localStorage.getItem("token")
+            }
+        })
+        const user = await res.json()
+        return user
     } catch (error) {
         console.error(error)
         throw error
