@@ -5,7 +5,7 @@ export async function createUserService(user) {
     try {
         const collection = db.collection('users');
         const result = await collection.insertOne(user);
-        console.log(result);
+        return result;
     } catch (error) {
         console.error(error)
         throw new Error(error);
