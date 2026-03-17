@@ -1,4 +1,4 @@
-import { createUserService, updateUserService } from "../services/authService.js"
+import { createUserService, deleteUserService, updateUserService } from "../services/authService.js"
 
 export async function createUserController(req, res) {
     try {
@@ -16,6 +16,17 @@ export async function updateUserController(req, res) {
         const { id, ...data } = req.body
         const user = await updateUserService(id, data)
         return res.status(200).json(user)
+    } catch (error) {
+        console.error(error.message)
+        return res.status(500).json({ error: error.message })
+    }
+}
+
+export async function deleteUserController(req, res) {
+    try {
+        const { id } = req.params
+        const result = await deleteUserService(id)
+        return res.status(200).json(result)
     } catch (error) {
         console.error(error.message)
         return res.status(500).json({ error: error.message })
