@@ -46,7 +46,7 @@ export async function loginController(req, res) {
             }
             const token = signToken(payload)
             await updateUserService(user._id, { login_last: new Date().toString() })
-            return res.status(200).json(token)
+            return res.status(200).json({ token })
         }
         return res.status(401).json({ error: "Incorrect username or password" })
     } catch (error) {
