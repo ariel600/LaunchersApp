@@ -53,8 +53,14 @@ export async function loginService(username, password) {
 export async function getUserService(id) {
     try {
         const collection = db.collection('users');
-        const user = await collection.findOne({ _id:id })
-        return user
+        const user = await collection.findOne({ _id: new ObjectId(id) })
+        return {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            user_type: user.user_type,
+            last_login: user.last_login
+        }
     } catch (error) {
         console.error(error)
         throw new Error(error);
