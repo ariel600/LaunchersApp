@@ -57,8 +57,9 @@ export async function loginController(req, res) {
 
 export async function getUserController(req, res) {
     try {
-        const { token } = req.body
-        verifyToken(token)
+        const { token } = req.headers.token
+        const user = verifyToken(token)
+        return res.status(200).json(user)
     } catch (error) {
         console.error(error.message)
         return res.status(500).json({ error: error.message })
