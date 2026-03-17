@@ -1,4 +1,4 @@
-import { createUserService, deleteUserService, updateUserService } from "../services/authService.js"
+import { createUserService, deleteUserService, loginService, updateUserService } from "../services/authService.js"
 
 export async function createUserController(req, res) {
     try {
@@ -27,6 +27,21 @@ export async function deleteUserController(req, res) {
         const { id } = req.params
         const result = await deleteUserService(id)
         return res.status(200).json(result)
+    } catch (error) {
+        console.error(error.message)
+        return res.status(500).json({ error: error.message })
+    }
+}
+
+export async function loginController(req, res) {
+    try {
+        const { username, password } = req.body
+        const login = await loginService(username, password)
+        if (login) {
+            updateUserService(login._id, { login_last: new Date.toString() })
+            return res.status(200).json({ login: "Successful" })
+        }
+        return res.status(401).json({ error: "Incorrect username or password" })
     } catch (error) {
         console.error(error.message)
         return res.status(500).json({ error: error.message })
