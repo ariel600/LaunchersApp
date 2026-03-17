@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { db } from "../db/connection.js";
 
 export async function createUserService(user) {
@@ -5,6 +6,20 @@ export async function createUserService(user) {
         const collection = db.collection('users');
         const result = await collection.insertOne(user);
         console.log(result);
+    } catch (error) {
+        console.error(error)
+        throw new Error(error);
+    }
+}
+
+export async function updateUserService(id, data) {
+    try {
+        const collection = db.collection('users');
+        const result = await collection.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: data }
+        )
+        return result
     } catch (error) {
         console.error(error)
         throw new Error(error);
