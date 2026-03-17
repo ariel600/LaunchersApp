@@ -1,5 +1,5 @@
 import { createUserService, deleteUserService, loginService, updateUserService } from "../services/authService.js"
-import { signToken, verifyToken } from "../utils/token.js"
+import { signToken } from "../utils/token.js"
 
 export async function createUserController(req, res) {
     try {
