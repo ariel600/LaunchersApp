@@ -9,6 +9,6 @@ router.post("/register", tokenMid, roleAdmin, createUserController)
 router.put("/register/update", tokenMid, roleAdmin, updateUserController)
 router.delete("/register/delete/:id", tokenMid, roleAdmin, deleteUserController)
 router.post("/login", loginController)
-router.post("/getUser", tokenMid, roleAll, getUserController)
+router.get("/getUser", tokenMid, roleAll, getUserController)
 
 export default router
