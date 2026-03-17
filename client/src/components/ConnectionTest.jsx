@@ -23,7 +23,7 @@ export default function ConnectionTest({ children, role }) {
 
     if (isLoging) return <div>is Loging</div>
     if (!user) return <Navigate to={"/login"} />
-    if (role !== user.user_type) {
+    if (role && role !== user.user_type) {
         alert("You do not have access permission.")
         return <Navigate to={"/"} />
     }
