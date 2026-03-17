@@ -42,8 +42,19 @@ export async function deleteUserService(id) {
 export async function loginService(username, password) {
     try {
         const collection = db.collection('users');
-        const login = await collection.findOne({ username, password })
-        return login
+        const user = await collection.findOne({ username, password })
+        return user
+    } catch (error) {
+        console.error(error)
+        throw new Error(error);
+    }
+}
+
+export async function getUserService(id) {
+    try {
+        const collection = db.collection('users');
+        const user = await collection.findOne({ _id:id })
+        return user
     } catch (error) {
         console.error(error)
         throw new Error(error);
